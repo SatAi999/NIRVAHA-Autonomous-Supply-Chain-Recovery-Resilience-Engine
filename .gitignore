@@ -1,3 +1,7 @@
+# Environment & Secrets
+.env
+.env.*
+
 # Dependencies
 node_modules/
 .pnp

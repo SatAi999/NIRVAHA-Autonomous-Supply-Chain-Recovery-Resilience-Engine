@@ -1,6 +1,9 @@
 import os
+from dotenv import load_dotenv
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from typing import Optional
+
+load_dotenv()
 
 class Settings(BaseSettings):
     # App Settings
@@ -9,13 +12,13 @@ class Settings(BaseSettings):
     DATABASE_URL: str = "sqlite:///./nirvaha.db"
     
     # LLM Settings
-    DEFAULT_LLM_PROVIDER: str = "ollama"  # "ollama", "gemini", "groq"
+    DEFAULT_LLM_PROVIDER: str = "groq"  # "ollama", "gemini", "groq"
     OLLAMA_BASE_URL: str = "http://localhost:11434"
     OLLAMA_MODEL: str = "llama3"
     GEMINI_API_KEY: Optional[str] = None
     GEMINI_MODEL: str = "gemini-2.5-flash"
-    GROQ_API_KEY: Optional[str] = None
-    GROQ_MODEL: str = "llama-3.3-70b-versatile"
+    GROQ_API_KEY: Optional[str] = os.getenv("GROQ_API_KEY")
+    GROQ_MODEL: str = "qwen/qwen3.8-27b"
     
     # Optimization Objective Weights (default balanced)
     WEIGHT_COST: float = 0.30
